@@ -32,7 +32,7 @@ class FeedsTableViewController: UITableViewController {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background.jpg")!)
         feeds()
         activityIndicator.stopAnimating()
-        UIApplication.sharedApplication().endIgnoringInteractionEvents()
+//        UIApplication.sharedApplication().endIgnoringInteractionEvents()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -59,6 +59,7 @@ class FeedsTableViewController: UITableViewController {
     }
     
     func feeds() {
+        refresh()
         loading()
         let query = PFQuery(className: "UsersConnections")
         query.whereKey("Follower", equalTo: (PFUser.currentUser()?.objectId)!)
@@ -104,7 +105,7 @@ class FeedsTableViewController: UITableViewController {
                 }
             }
         })
-        refresher.endRefreshing()
+        self.refresher.endRefreshing()
     }
     
     func loading() {
@@ -113,14 +114,14 @@ class FeedsTableViewController: UITableViewController {
         activityIndicator.hidesWhenStopped = true
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
         activityIndicator.startAnimating()
-        UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+//        UIApplication.sharedApplication().beginIgnoringInteractionEvents()
     }
     
     func refresh() {
         refresher.attributedTitle = NSAttributedString(string: "Pull to Refresh")
         refresher.addTarget(self, action: #selector(feeds), forControlEvents: UIControlEvents.ValueChanged)
         self.tableView.addSubview(refresher)
-        feeds()
+//        feeds()
     }
 
     

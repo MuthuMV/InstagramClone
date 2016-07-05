@@ -133,6 +133,7 @@ class UsersTableViewController: UITableViewController {
                 }else{
                     if let objects = objects {
                         for object in objects {
+                            print("unfollowing the user/..")
                             object.deleteInBackground()
                         }
                     }
